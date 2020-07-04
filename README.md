@@ -40,7 +40,7 @@ Ejs | 3.1.3
    - node_modules
    - gitignore
    - index.js
-   - package.json
+   - package.json 
    - package-lock.json
    
 
@@ -69,4 +69,4 @@ npm strat
 
 > stay tuned for my detailed explanation!!
 
-# :eyes: End of my ReadME
+# :eyes: End of my ReadME. Follow me if you like it!!!
