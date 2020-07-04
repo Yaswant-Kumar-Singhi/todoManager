@@ -67,4 +67,6 @@ npm strat
 ![](Demo.gif)
 
 
+> stay tuned for my detailed explanation!!
+
 # :eyes: End of my ReadME
