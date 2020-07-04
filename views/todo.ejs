@@ -1,0 +1,217 @@
+<html>
+    <head>
+        <title> <%= title%> </title>
+        <!-- importing bootstrap and font-awesome -->
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    </head>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        /*Styling Body*/
+        body{
+            background-image:linear-gradient(orange,red);
+            font-family: 'Times New Roman', Times, serif;
+        }
+
+       /* Genearal Flex styles for reuse */
+        .flex-col{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+  
+        .flex-row{
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: space-around;
+        }
+        
+        .flex-row-add{
+            justify-content: space-between;
+        }
+        
+        .container-fluid{
+            z-index: 1;
+            margin-top: 2%;
+            width: 38vw;
+        }
+        
+        h5{
+            margin-bottom: -5px;
+        }
+  
+        .addButton{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width:auto;
+            border: none;
+                       
+        }
+        
+        /*Providing a box shadow to the card*/
+        .card:hover{
+            box-shadow: 0 8px 16px 0 rgba(32,32,32,0.9);
+        }
+        
+        /* Applying styling to the heading,clock and button text */
+        h1,h2 {
+            font-family: "Bookman Old Style";
+            color: #fff;
+            letter-spacing: -2px;
+        }
+
+        /* Text Area for growing content */
+        textarea{  
+            overflow:hidden;
+            padding:10px;
+            width:250px;
+            font-size:14px;
+            display:block;
+            border-radius:10px;
+            border:6px solid #556677;
+        }
+    
+    </style>
+
+    <body>
+
+
+        <div class="container-fluid col-md-6 felx-col">
+            <div class="d-flex justify-content-center">
+                <h1 class="center"> <span>Todo List Manager</span></h1>
+            </div>
+            <h2 class=" d-flex justify-content-center text-white day"></h2>
+            <h2 class=" d-flex justify-content-center text-white clck"></h2>
+
+            <form class="flex-col" method="post" action="/add-task">
+                <div class="form-row">
+                    <div class="col-md-12 mb-3">
+                    <label for="validationDefault01"><h5>Description</h5></label>
+                    <textarea type="text" name="description" class="form-control" id="validationDefault01" placeholder="What do you want to do?" required rows='1' placeholder='Auto-Expanding Textarea'></textarea>
+                    </div>
+                
+                    
+                    <div class="form-group col-md-6 mb-3">
+                        <label for="exampleFormControlSelect1"><h5>Category</h5></label>
+                        <select name="category" class="form-control" id="exampleFormControlSelect1" required>
+                            <option selected disabled value="">Choose a Category</option>
+                            <option>Personal</option>
+                            <option>Professional</option>
+                            <option>School</option>
+                            <option>College</option>
+                        </select>
+                    </div>
+
+                    <div class="col-md-6 mb-3">
+                        <label for="validationDefault01"><h5>Due Date</h5></label>
+                        <input name="date" type="date" class="form-control" id="validationDefault01" value="Mark" required>
+                    </div>
+
+                </div>
+            
+                <button class="flex-row addButton col-md-12 mb-3 mt-1 btn btn-success" type="submit" onclick="addAlert()">
+                    <i class="fas fa-plus"></i>
+                    <h2 style="display: inline;">Add Task</h2>
+                </button>
+
+                
+
+            </form>
+            <form class="flex-col" method="get" action="/delete-task" onclick="dltMsg()">
+                <button class="flex-row addButton col-md-12 mb-3 mt-1 btn btn-danger" type="submit"  >
+                        <h2 style="display: inline;">Clear Form</h2>
+                </button>
+            </form>
+
+            <!-- Showing the content form database -->
+                <% for(let i of todoInfo){ %>
+                    <div class="card  text-white mb-3">
+
+                        <div class="flex-row flex-row-add card-header bg-dark border-white">
+                            <h5 style="display: inline;">
+                                <span >Category : </span> 
+                                <span ><%= i.category %></span>
+                            </h5>
+                            <a href="/delete-task/?id=<%= i._id %>"> 
+                                <button class="btn btn-danger">
+                                    <i class="fas fa-trash-alt"></i>
+                                </button>
+                            </a>
+
+                        </div>
+
+                        <div class="card-body bg-secondary">
+                            <h5 style="display: inline;" class="card-title">
+                                <span>Description : </span> 
+                                <span><%= i.description %></span>
+                            </h5>
+                          <p class="flex-row card-text mt-2">
+                                <span class="ml-3">
+                                    <i class="fas fa-calendar-alt"></i>
+                                    <%= i.date %>
+                                </span>
+                            </p>
+                        </div>
+
+                    </div>
+
+                <% } %>
+        </div>
+
+        <!-- Adding JS file -->
+        <script>
+            var textarea = document.querySelector('textarea');
+            textarea.addEventListener('keydown', autosize);
+             
+            function autosize(){
+                var el = this;
+                setTimeout(function(){
+                  el.style.cssText = 'height:auto; padding:5px';
+                  el.style.cssText = 'height:' + el.scrollHeight + 'px';
+                },0);
+            }
+
+            function dltMsg(){
+                alert("You are going to clear the form!")
+            }
+
+            function digiclock(){
+            
+                var date = new Date();
+                var hour = date.getHours() + '';
+                var min = date.getMinutes() + '';
+                var sec = date.getSeconds() + '';
+                var day = date.getDay();
+
+                if(hour.length<2)
+                    hour = '0' + hour; 
+                
+                if(min.length<2)
+                    min = '0' + min; 
+                
+                if(sec.length<2)
+                    sec = '0' + sec; 
+                
+                    var weekdays = ['Sun','Mon','Tue','Wed','Thur','Fri','Sat']
+
+                var clock =  hour +':'+ min+':'+  sec;
+                var currday = weekdays[day];
+                document.querySelector('.day').innerHTML = currday;
+                document.querySelector('.clck').innerHTML = clock;
+
+            }
+
+          digiclock();
+          setInterval(digiclock,1000);
+
+        </script>
+
+    </body>
+</html>
