@@ -1,8 +1,11 @@
 # todoManager
 
-
 ### Why we should use Todo List Manager?
 > One of the most important reasons for keeping a to-do list is the organization. Organizing your tasks with a list can make everything much more manageable and make you feel grounded.
+
+![](https://img.shields.io/badge/version-1.0.1-orange) ![](https://img.shields.io/badge/dependencies-up%20to%20date-success) 
+![](https://img.shields.io/badge/node--lts%40latest-10.15.0-brightgreen) ![](https://img.shields.io/badge/platform-win--32%20%7C%20win--64-lightgrey)
+![](https://img.shields.io/badge/website-offline-lightgrey)
 
 ### Features
 - [x] You Have Current Date and Time. So no need to worry about your time.
@@ -22,29 +25,6 @@ MongoDb | 3.5.7
 Express| 4.17.1
 Ejs | 3.1.3
 
-
-#### My Tree Structure of my Project?
-
-*  ToDo-App
-   - Config 
-     - mongoose.js
-   - Controllers
-     - mainController.js
-     - taskController.js
-   - Models
-     - todoInfo.js 
-   - Routes
-     - index.js 
-   - Views 
-     - todo.ejs 
-   - node_modules
-   - gitignore
-   - index.js
-   - package.json 
-   - package-lock.json
-   
-
-
 #### How To Strat my Application?
 
 * Install dependencies for my project to start
@@ -62,6 +42,31 @@ mongodb://localhost/TODO-APP
 npm strat 
  
 ```
+
+  #### File directory structure.
+```
+$ tree 
+.
+
+├── config
+│   └── mongoose.js
+├── controllers
+│   ├── mainController.js
+|   └── taskController.js
+├── models
+│   └── todoInfo.js 
+├── routes
+│   └── index.js
+├── views
+│   └── todo.ejs
+├── index.js
+├── .gitignore
+├── package.json
+├── package-lock.json
+├── node_modules
+└── README.md
+```
+
 
 ```Take a look at my work```
 ![](Demo.gif)
